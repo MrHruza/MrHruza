@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historie | Minecraft & Web Dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* (Zde by byl stejný CSS kód jako nahoře, pro přehlednost zkráceno) */
+        :root { --primary: #ff0000; --bg-dark: #000000; --text-white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-dark); color: var(--text-white); font-family: 'Segoe UI', sans-serif; }
+        .highlight { color: var(--primary); }
+        .navbar { display: flex; justify-content: space-between; padding: 1.5rem 10%; background: #000; border-bottom: 2px solid var(--primary); }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+        .history-hero { padding: 100px 10%; text-align: center; background: linear-gradient(180deg, #300 0%, #000 100%); }
+        .history-hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+
+        .timeline { padding: 50px 15%; }
+        .event-card {
+            background: #0a0a0a;
+            border-left: 4px solid var(--primary);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 0 15px 15px 0;
+            transition: 0.3s;
+        }
+        .event-card:hover { background: #151515; transform: translateX(10px); }
+        .event-card h3 { font-size: 1.8rem; margin-bottom: 10px; color: var(--primary); }
+        .event-card .date { font-weight: bold; color: #888; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div style="font-size: 1.8rem; font-weight: 900;">MOJE<span class="highlight">JMÉNO</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="historie.html" class="active">Historie</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="history-hero">
+        <h1>MOJE <span class="highlight">CESTA</span></h1>
+        <p>Kde jsem začínal a na jakých projektech jsem zanechal svou stopu.</p>
+    </section>
+
+    <section class="timeline">
+        
+        <div class="event-card">
+            <span class="date">2024 - Současnost</span>
+            <h3>Hlavní Technik - Server "SuperCraft"</h3>
+            <p>Správa kompletního technického zázemí, optimalizace databází a tvorba unikátních 3D kosmetických doplňků pro hráče.</p>
+        </div>
+
+        <div class="event-card">
+            <span class="date">2023 - 2024</span>
+            <h3>Web Developer - Portál "EconWeb"</h3>
+            <p>Vytvoření plně responzivního webu pro herní komunitu s propojením na herní statistiky a automatický obchod.</p>
+        </div>
+
+        <div class="event-card">
+            <span class="date">2022</span>
+            <h3>Modelář - Projekt "KingdomModels"</h3>
+            <p>Tvorba více než 50 vlastních modelů zbraní a brnění pro RPG servery v Blockbenchi.</p>
+        </div>
+
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #444;">
+        &copy; 2024 Všechna práva vyhrazena.
+    </footer>
+
+</body>
+</html>
