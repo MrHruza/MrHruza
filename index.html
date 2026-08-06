@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Minecraft & Web Dev</title>
+    <title>Portfolio | Minecraft Developer & Tech</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* GLOBÁLNÍ STYL */
         :root {
-            --primary: #ff0000;
-            --primary-dark: #800000;
-            --bg-dark: #000000;
-            --bg-gradient: linear-gradient(135deg, #2e0000 0%, #000000 100%);
+            --primary: #ff2222;
+            --primary-glow: rgba(255, 34, 34, 0.4);
             --text-white: #ffffff;
-            --text-gray: #bbbbbb;
+            --text-gray: #aaaaaa;
+            /* Výchozí dynamické pozadí */
+            --bg-current: linear-gradient(180deg, #100000 0%, #000000 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: var(--bg-dark);
-            background-attachment: fixed;
-            color: var(--text-white);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
         }
 
-        .highlight { color: var(--primary); font-weight: bold; }
+        body {
+            background: var(--bg-current);
+            color: var(--text-white);
+            overflow-x: hidden;
+            transition: background 1.5s ease;
+        }
+
+        .highlight {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
 
         /* NAVBAR */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 10%;
-            background: rgba(0, 0, 0, 0.9);
+            padding: 1.2rem 8%;
+            background: rgba(10, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -41,102 +49,198 @@
         }
 
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { 
-            color: white; text-decoration: none; font-weight: 500; 
-            transition: 0.3s; padding: 5px 10px;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: rgba(255,0,0,0.1); border-radius: 5px; }
 
-        /* HERO SECTION */
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* HERO SEKCE S ANIMACÍ */
         .hero {
-            height: 80vh;
+            height: 75vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: var(--bg-gradient);
-            padding: 0 10%;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, rgba(255,0,0,0.15) 0%, transparent 70%);
         }
 
-        .hero h1 { font-size: 4rem; margin-bottom: 1rem; text-transform: uppercase; }
-        .hero p { font-size: 1.5rem; color: var(--text-gray); max-width: 800px; }
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
 
-        /* SEKCE O MNĚ (Text + Obrázek) */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 100px 10%;
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* SEKCE O MNĚ + VZNÁŠEJÍCÍ SE POSTAVIČKA */
+        .about-section {
+            padding: 80px 8%;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
         }
 
         .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .about-image img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        .about-text p { color: var(--text-gray); font-size: 1.1rem; line-height: 1.7; margin-bottom: 15px; }
+
+        .about-avatar-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 300px;
         }
 
-        /* SLIDER (Posun doprava) */
-        .slider-section { padding: 80px 0; background: #050505; text-align: center; overflow: hidden; }
-        .slider-section h2 { margin-bottom: 40px; }
-        
-        .slider { display: flex; width: 100%; overflow: hidden; position: relative; }
+        /* ANIMACE VZNÁŠENÍ (FLOATING) */
+        .floating-avatar {
+            width: 320px;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(255, 0, 0, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* NEKONEČNÝ SLIDER DOPRAVA */
+        .slider-section {
+            padding: 60px 0;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .slider {
+            overflow: hidden;
+            width: 100%;
+            margin-top: 30px;
+        }
+
         .slide-track {
             display: flex;
-            width: calc(300px * 10);
-            animation: scroll-right 25s linear infinite; /* Animace doprava */
+            width: calc(320px * 10);
+            animation: scrollRight 20s linear infinite;
         }
 
-        .slide { width: 300px; padding: 15px; }
-        .slide img { 
-            width: 100%; border-radius: 10px; border: 2px solid #333; 
-            transition: 0.4s; filter: grayscale(50%);
-        }
-        .slide img:hover { border-color: var(--primary); filter: grayscale(0%); transform: scale(1.05); }
+        .slide-track:hover { animation-play-state: paused; }
 
-        @keyframes scroll-right {
-            0% { transform: translateX(calc(-300px * 5)); }
+        .slide { width: 320px; padding: 10px; }
+        .slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .slide img:hover { transform: scale(1.08); }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(calc(-320px * 5)); }
             100% { transform: translateX(0); }
         }
 
-        /* DISCORD SEKCE */
-        .discord-box {
-            margin: 100px 10%;
-            padding: 60px;
-            background: linear-gradient(45deg, #1a0000, #000000);
-            border: 1px solid var(--primary);
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        /* DISCORD KARTA WITH AVATAR MINI */
+        .discord-section {
+            padding: 80px 8%;
+            display: flex;
+            justify-content: center;
         }
+
+        .discord-card {
+            background: linear-gradient(135deg, #1a0000 0%, #050000 100%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 30px var(--primary-glow);
+            position: relative;
+        }
+
         .btn-discord {
             display: inline-block;
-            margin-top: 30px;
+            margin-top: 20px;
             background: #5865F2;
             color: white;
-            padding: 15px 40px;
-            border-radius: 10px;
-            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 1.2rem;
-            transition: 0.3s;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
         }
-        .btn-discord:hover { background: #4752c4; transform: translateY(-5px); }
+
+        .btn-discord:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: #4752C4;
+        }
 
         /* FOOTER */
-        footer { padding: 60px 10%; background: #000; border-top: 1px solid #222; }
-        .footer-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .contact-list { list-style: none; margin-top: 20px; }
-        .contact-list li { margin-bottom: 15px; font-size: 1.1rem; }
-        .contact-list i { color: var(--primary); margin-right: 10px; width: 25px; }
+        footer {
+            background: #000000;
+            padding: 40px 8% 20px 8%;
+            border-top: 1px solid #222;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid #111;
+            padding-top: 20px;
+        }
+
+        /* ANIMACE VHODNÉ PRO NAČTENÍ */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         @media (max-width: 768px) {
-            .about-container, .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .about-section { flex-direction: column; text-align: center; }
             .hero h1 { font-size: 2.5rem; }
         }
     </style>
@@ -147,68 +251,96 @@
         <div class="logo">MOJE<span class="highlight">JMÉNO</span></div>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="historie.html">Historie</a></li>
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="historie.html"><i class="fa-solid fa-clock-rotate-left"></i> Historie</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Technik & <span class="highlight">Developer</span></h1>
-        <p>Specializuji se na Minecraft modely, konfiguraci pluginů a moderní webové stránky pro herní komunity.</p>
+        <h1>Minecraft <span class="highlight">Developer</span> & Technik</h1>
+        <p>Tvorba custom 3D modelů, kompletní konfigurace pluginů a moderní webové stránky.</p>
     </section>
 
-    <section class="about-container">
+    <section class="about-section">
         <div class="about-text">
-            <h2>KDO VLASTNĚ <span class="highlight">JSEM?</span></h2>
-            <p>Ahoj! Jsem technik se zaměřením na Minecraft ekosystém. Dokážu vytvořit unikátní 3D modely (Blockbench), nastavit kompletně serverové pluginy a propojit vše s moderním webem.</p>
-            <p style="margin-top: 15px;">Moje práce kombinuje technickou preciznost a kreativní design.</p>
+            <h2>O MNĚ & <span class="highlight">TVORBĚ</span></h2>
+            <p>Vytvářím kompletní technické zázemí pro Minecraft servery. Ať už potřebuješ originální 3D modely do Blockbenchi, vyladěné pluginy bez chyb nebo web napojený na tvoji komunitu.</p>
+            <p>Mým cílem je dodat reprezentativní a funkční projekt na míru.</p>
         </div>
-        <div class="about-image">
-            <img src="https://via.placeholder.com/500x400/200000/ffffff?text=Minecraft+Model+Showcase" alt="Moje práce">
+
+        <div class="about-avatar-container">
+            <img src="https://via.placeholder.com/350x450/1a0000/ff2222?text=Tvoje+Postavicka" alt="Animovaná Postavička" class="floating-avatar">
         </div>
     </section>
 
     <section class="slider-section">
-        <h2>UKÁZKY <span class="highlight">PRÁCE</span></h2>
+        <h2>UKÁZKY <span class="highlight">PROJEKTŮ</span></h2>
         <div class="slider">
             <div class="slide-track">
-                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Model+1" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/800000/ffffff?text=Plugin+2" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Web+3" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Config+4" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/900000/ffffff?text=Design+5" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Model+1" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/800000/ffffff?text=Plugin+2" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Web+3" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Config+4" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/900000/ffffff?text=Design+5" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Model+1" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Plugin+2" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/200000/ffffff?text=Web+3" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Setup+4" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/400000/ffffff?text=Config+5" alt=""></div>
+                
+                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Model+1" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Plugin+2" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/200000/ffffff?text=Web+3" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Setup+4" alt=""></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/400000/ffffff?text=Config+5" alt=""></div>
             </div>
         </div>
     </section>
 
-    <section class="discord-box">
-        <h2>MÁŠ ZÁJEM O <span class="highlight">PROJEKT?</span></h2>
-        <p>Připoj se na můj Discord a domluvíme podrobnosti.</p>
-        <a href="https://discord.gg/tvoje-linka" class="btn-discord"><i class="fa-brands fa-discord"></i> Vstoupit na Discord</a>
+    <section class="discord-section">
+        <div class="discord-card">
+            <i class="fa-brands fa-discord" style="font-size: 3.5rem; color: #5865F2; margin-bottom: 15px;"></i>
+            <h2>PŘIPOJ SE NA DISCORD</h2>
+            <p style="color: #aaa; margin-top: 10px;">Chceš objednat službu, konzultovat nápad nebo se jen na něco zeptat?</p>
+            <a href="https://discord.gg/tvuj-odkaz" class="btn-discord" target="_blank"><i class="fa-brands fa-discord"></i> Vstoupit na Server</a>
+        </div>
     </section>
 
     <footer>
-        <div class="footer-content">
+        <div class="footer-content" id="kontakt">
             <div>
-                <h3>KONTAKT</h3>
-                <ul class="contact-list">
-                    <li><i class="fa-brands fa-discord"></i> Nick: tvuj_nick</li>
-                    <li><i class="fa-solid fa-envelope"></i> Email: tvuj@email.cz</li>
-                    <li><i class="fa-solid fa-location-dot"></i> Působnost: Celá ČR / SR</li>
-                </ul>
+                <h3 class="highlight">KONTAKTY</h3>
+                <p style="margin-top: 10px;"><i class="fa-brands fa-discord highlight"></i> Discord: <strong>tvuj_nick</strong></p>
+                <p style="margin-top: 5px;"><i class="fa-solid fa-envelope highlight"></i> Email: <strong>email@domena.cz</strong></p>
             </div>
             <div>
-                <h3>O PROJEKTU</h3>
-                <p>Tento web slouží jako portfolio mých prací v oblasti Minecraft techniky a webového vývoje.</p>
+                <h3 class="highlight">INFO</h3>
+                <p style="margin-top: 10px; color: #aaa;">Pravidelná údržba & vývoj Minecraft serverů.</p>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Developer Portfolio. Všechna práva vyhrazena.</p>
         </div>
     </footer>
 
+    <script>
+        function updateBackgroundByTime() {
+            const hour = new Date().getHours();
+            const body = document.body;
+
+            if (hour >= 6 && hour < 12) {
+                /* RÁNO: Světlejší tmavě červený přechod */
+                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #2b0303 0%, #0d0202 50%, #000000 100%)');
+            } else if (hour >= 12 && hour < 18) {
+                /* ODPOLEDNE: Sytější červeno-černý přechod */
+                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #200000 0%, #0a0000 50%, #000000 100%)');
+            } else if (hour >= 18 && hour < 22) {
+                /* VEČER: Tmavý červeno-fialový nádech */
+                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #150008 0%, #050003 50%, #000000 100%)');
+            } else {
+                /* NOC (22:00 - 06:00): Zcela temné s jemným červeným zářením */
+                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #0a0000 0%, #020000 50%, #000000 100%)');
+            }
+        }
+
+        // Spustit ihned při načtení
+        updateBackgroundByTime();
+    </script>
 </body>
 </html>
