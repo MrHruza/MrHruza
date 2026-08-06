@@ -8,11 +8,9 @@
     <style>
         :root {
             --primary: #ff2222;
-            --primary-glow: rgba(255, 34, 34, 0.4);
+            --primary-glow: rgba(255, 34, 34, 0.5);
             --text-white: #ffffff;
             --text-gray: #aaaaaa;
-            /* Výchozí dynamické pozadí */
-            --bg-current: linear-gradient(180deg, #100000 0%, #000000 100%);
         }
 
         * {
@@ -23,10 +21,12 @@
         }
 
         body {
-            background: var(--bg-current);
+            /* Tvoje vlastní pozadí z odkazu + tmavý překryv */
+            background: linear-gradient(180deg, rgba(20, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.9) 100%), 
+                        url('https://github.com/user-attachments/assets/b0df220c-1740-464a-ae3f-7e58278e29e3') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-white);
             overflow-x: hidden;
-            transition: background 1.5s ease;
         }
 
         .highlight {
@@ -40,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem 8%;
-            background: rgba(10, 0, 0, 0.85);
+            background: rgba(10, 0, 0, 0.9);
             backdrop-filter: blur(8px);
             position: sticky;
             top: 0;
@@ -65,16 +65,15 @@
             box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        /* HERO SEKCE S ANIMACÍ */
+        /* HERO SEKCE */
         .hero {
-            height: 75vh;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: radial-gradient(circle at center, rgba(255,0,0,0.15) 0%, transparent 70%);
         }
 
         .hero h1 {
@@ -90,7 +89,7 @@
             animation: fadeInUp 1s ease;
         }
 
-        /* SEKCE O MNĚ + VZNÁŠEJÍCÍ SE POSTAVIČKA */
+        /* SEKCE O MNĚ + POSTAVIČKA */
         .about-section {
             padding: 80px 8%;
             display: flex;
@@ -98,6 +97,8 @@
             justify-content: space-between;
             gap: 50px;
             flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
         }
 
         .about-text {
@@ -115,11 +116,12 @@
             min-width: 300px;
         }
 
-        /* ANIMACE VZNÁŠENÍ (FLOATING) */
+        /* VZNÁŠEJÍCÍ SE POSTAVIČKA */
         .floating-avatar {
             width: 320px;
             height: auto;
-            filter: drop-shadow(0 15px 25px rgba(255, 0, 0, 0.4));
+            border-radius: 15px;
+            filter: drop-shadow(0 10px 20px rgba(255, 0, 0, 0.5));
             animation: float 4s ease-in-out infinite;
         }
 
@@ -133,7 +135,7 @@
         .slider-section {
             padding: 60px 0;
             text-align: center;
-            background: rgba(0,0,0,0.5);
+            background: rgba(5, 5, 5, 0.85);
         }
 
         .slider {
@@ -144,30 +146,31 @@
 
         .slide-track {
             display: flex;
-            width: calc(320px * 10);
-            animation: scrollRight 20s linear infinite;
+            width: calc(300px * 10);
+            animation: scrollRight 22s linear infinite;
         }
 
         .slide-track:hover { animation-play-state: paused; }
 
-        .slide { width: 320px; padding: 10px; }
+        .slide { width: 300px; padding: 10px; }
         .slide img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             border-radius: 12px;
             border: 2px solid var(--primary);
             transition: transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
         }
 
         .slide img:hover { transform: scale(1.08); }
 
         @keyframes scrollRight {
-            0% { transform: translateX(calc(-320px * 5)); }
+            0% { transform: translateX(calc(-300px * 5)); }
             100% { transform: translateX(0); }
         }
 
-        /* DISCORD KARTA WITH AVATAR MINI */
+        /* DISCORD SEKCE */
         .discord-section {
             padding: 80px 8%;
             display: flex;
@@ -175,15 +178,14 @@
         }
 
         .discord-card {
-            background: linear-gradient(135deg, #1a0000 0%, #050000 100%);
+            background: linear-gradient(135deg, rgba(30, 0, 0, 0.9) 0%, rgba(5, 0, 0, 0.95) 100%);
             border: 2px solid var(--primary);
             border-radius: 20px;
             padding: 40px;
             text-align: center;
             max-width: 600px;
             width: 100%;
-            box-shadow: 0 0 30px var(--primary-glow);
-            position: relative;
+            box-shadow: 0 0 35px var(--primary-glow);
         }
 
         .btn-discord {
@@ -228,7 +230,6 @@
             padding-top: 20px;
         }
 
-        /* ANIMACE VHODNÉ PRO NAČTENÍ */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -259,36 +260,36 @@
 
     <section class="hero">
         <h1>Minecraft <span class="highlight">Developer</span> & Technik</h1>
-        <p>Tvorba custom 3D modelů, kompletní konfigurace pluginů a moderní webové stránky.</p>
+        <p>Tvorba custom 3D modelů, kompletní konfigurace pluginů a vývoj webů.</p>
     </section>
 
     <section class="about-section">
         <div class="about-text">
             <h2>O MNĚ & <span class="highlight">TVORBĚ</span></h2>
-            <p>Vytvářím kompletní technické zázemí pro Minecraft servery. Ať už potřebuješ originální 3D modely do Blockbenchi, vyladěné pluginy bez chyb nebo web napojený na tvoji komunitu.</p>
-            <p>Mým cílem je dodat reprezentativní a funkční projekt na míru.</p>
+            <p>Ahoj! Vytvářím kompletní technické zázemí pro Minecraft servery. Věnuji se tvorbě 3D modelů, nastavení pluginů a vývoji webů.</p>
+            <p>Mám za sebou bohaté zkušenosti z mnoha známých i zahraničních projektů.</p>
         </div>
 
         <div class="about-avatar-container">
-            <img src="https://via.placeholder.com/350x450/1a0000/ff2222?text=Tvoje+Postavicka" alt="Animovaná Postavička" class="floating-avatar">
+            <img src="Snímek obrazovky 2025-10-23 171542.png" alt="Moje Postavička" class="floating-avatar">
         </div>
     </section>
 
     <section class="slider-section">
-        <h2>UKÁZKY <span class="highlight">PROJEKTŮ</span></h2>
+        <h2>UKÁZKY <span class="highlight">MOJÍ PRÁCE</span></h2>
         <div class="slider">
             <div class="slide-track">
-                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Model+1" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Plugin+2" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/200000/ffffff?text=Web+3" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Setup+4" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/400000/ffffff?text=Config+5" alt=""></div>
-                
-                <div class="slide"><img src="https://via.placeholder.com/300x200/300000/ffffff?text=Model+1" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/500000/ffffff?text=Plugin+2" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/200000/ffffff?text=Web+3" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/600000/ffffff?text=Setup+4" alt=""></div>
-                <div class="slide"><img src="https://via.placeholder.com/300x200/400000/ffffff?text=Config+5" alt=""></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" alt="Ukázka 1"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" alt="Ukázka 2"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" alt="Ukázka 3"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" alt="Ukázka 4"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" alt="Ukázka 5"></div>
+
+                <div class="slide"><img src="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" alt="Ukázka 1"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" alt="Ukázka 2"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" alt="Ukázka 3"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" alt="Ukázka 4"></div>
+                <div class="slide"><img src="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" alt="Ukázka 5"></div>
             </div>
         </div>
     </section>
@@ -297,13 +298,13 @@
         <div class="discord-card">
             <i class="fa-brands fa-discord" style="font-size: 3.5rem; color: #5865F2; margin-bottom: 15px;"></i>
             <h2>PŘIPOJ SE NA DISCORD</h2>
-            <p style="color: #aaa; margin-top: 10px;">Chceš objednat službu, konzultovat nápad nebo se jen na něco zeptat?</p>
-            <a href="https://discord.gg/tvuj-odkaz" class="btn-discord" target="_blank"><i class="fa-brands fa-discord"></i> Vstoupit na Server</a>
+            <p style="color: #aaa; margin-top: 10px;">Chceš domluvit zakázku nebo se přidat do komunity?</p>
+            <a href="https://discord.gg/tvuj-odkaz" class="btn-discord" target="_blank"><i class="fa-brands fa-discord"></i> Vstoupit na Discord</a>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content" id="kontakt">
+        <div class="footer-content">
             <div>
                 <h3 class="highlight">KONTAKTY</h3>
                 <p style="margin-top: 10px;"><i class="fa-brands fa-discord highlight"></i> Discord: <strong>tvuj_nick</strong></p>
@@ -311,11 +312,11 @@
             </div>
             <div>
                 <h3 class="highlight">INFO</h3>
-                <p style="margin-top: 10px; color: #aaa;">Pravidelná údržba & vývoj Minecraft serverů.</p>
+                <p style="margin-top: 10px; color: #aaa;">Minecraft Modelář, Plugin Technik & Web Developer.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Developer Portfolio. Všechna práva vyhrazena.</p>
+            <p>&copy; 2026 Portfolio. Všechna práva vyhrazena.</p>
         </div>
     </footer>
 
@@ -324,22 +325,16 @@
             const hour = new Date().getHours();
             const body = document.body;
 
+            // Úprava tmavosti vrstvy přes pozadí podle času
             if (hour >= 6 && hour < 12) {
-                /* RÁNO: Světlejší tmavě červený přechod */
-                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #2b0303 0%, #0d0202 50%, #000000 100%)');
+                body.style.background = "linear-gradient(180deg, rgba(40, 0, 0, 0.65) 0%, rgba(10, 0, 0, 0.85) 100%), url('https://github.com/user-attachments/assets/b0df220c-1740-464a-ae3f-7e58278e29e3') no-repeat center center fixed";
             } else if (hour >= 12 && hour < 18) {
-                /* ODPOLEDNE: Sytější červeno-černý přechod */
-                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #200000 0%, #0a0000 50%, #000000 100%)');
-            } else if (hour >= 18 && hour < 22) {
-                /* VEČER: Tmavý červeno-fialový nádech */
-                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #150008 0%, #050003 50%, #000000 100%)');
+                body.style.background = "linear-gradient(180deg, rgba(25, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%), url('https://github.com/user-attachments/assets/b0df220c-1740-464a-ae3f-7e58278e29e3') no-repeat center center fixed";
             } else {
-                /* NOC (22:00 - 06:00): Zcela temné s jemným červeným zářením */
-                body.style.setProperty('--bg-current', 'linear-gradient(180deg, #0a0000 0%, #020000 50%, #000000 100%)');
+                body.style.background = "linear-gradient(180deg, rgba(10, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.98) 100%), url('https://github.com/user-attachments/assets/b0df220c-1740-464a-ae3f-7e58278e29e3') no-repeat center center fixed";
             }
+            body.style.backgroundSize = "cover";
         }
-
-        // Spustit ihned při načtení
         updateBackgroundByTime();
     </script>
 </body>
