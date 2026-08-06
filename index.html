@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O mně | Minecraft Developer & Configurator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ZÁKLADNÍ NASTAVENÍ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* Přechod z tmavě červené do černé */
+            background: linear-gradient(180deg, #1a0000 0%, #0d0000 40%, #000000 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .highlight {
+            color: #ff3333;
+        }
+
+        /* NAVIGAČNÍ LIŠTA */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(15, 0, 0, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #ff3333;
+            box-shadow: 0 4px 15px rgba(255, 51, 51, 0.2);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #ff3333;
+        }
+
+        .btn-head {
+            background-color: #ff3333;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-head:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* HERO SEKCÍ (ÚVOD) */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle, rgba(255, 51, 51, 0.15) 0%, rgba(0,0,0,0) 70%);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero-desc {
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #5865F2; /* Discord Modrá */
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #4752C4;
+        }
+
+        /* SEKCÍ O MNĚ */
+        .about-section {
+            padding: 80px 8%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about-text ul {
+            list-style: none;
+        }
+
+        .about-text li {
+            margin-bottom: 15px;
+            color: #ddd;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.3);
+        }
+
+        /* POSOUVAJÍCÍ SE GALERIE DOPRAVA */
+        .slider-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .slider-section h2 {
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .slider {
+            height: 220px;
+            margin: auto;
+            position: relative;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .slide-track {
+            display: flex;
+            width: calc(320px * 10);
+            animation: scroll 20s linear infinite;
+        }
+
+        .slide-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slide {
+            width: 320px;
+            padding: 10px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ff3333;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .slide img:hover {
+            transform: scale(1.05);
+            border-color: #ffffff;
+        }
+
+        /* Plynulá animace posunování obrázků */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-320px * 5));
+            }
+        }
+
+        /* DISCORD SEKCÍ */
+        .discord-section {
+            padding: 80px 8%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .discord-card {
+            background: linear-gradient(145deg, #1f0505, #0a0000);
+            border: 1px solid #ff3333;
+            padding: 50px 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 650px;
+            box-shadow: 0 0 35px rgba(255, 51, 51, 0.25);
+        }
+
+        .discord-icon {
+            font-size: 55px;
+            color: #5865F2;
+            margin-bottom: 20px;
+        }
+
+        .discord-card h2 {
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .discord-card p {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            display: inline-block;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+            transform: scale(1.05);
+        }
+
+        /* PATKA A KONTAKTY */
+        footer {
+            background-color: #050000;
+            border-top: 1px solid #330000;
+            padding-top: 50px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8% 40px 8%;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info h3 {
+            color: #ff3333;
+            margin-bottom: 10px;
+        }
+
+        .footer-info p {
+            color: #aaa;
+        }
+
+        .footer-contacts .contact-item {
+            margin-top: 12px;
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        .footer-contacts i {
+            color: #ff3333;
+            margin-right: 12px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            background-color: #000000;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #111;
+        }
+
+        /* RESPONZIVITA PRO MOBILY */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .about-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <span class="logo-text">MY<span class="highlight">NAME</span></span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Hlavní stránka</a></li>
+                <li><a href="historie.html"><i class="fa-solid fa-clock-rotate-left"></i> Historie</a></li>
+            </ul>
+        </nav>
+        <a href="#kontakt" class="btn-head">Kontakt</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AHOJ, JÁ JSEM <span class="highlight">DEVELOPER</span></h1>
+            <p class="subtitle">Minecraft Modelář • Plugin Technik • Web Developer</p>
+            <p class="hero-desc">
+                Vytvářím unikátní 3D modely přes Blockbench, konfiguruji komplexní Minecraft pluginy 
+                a stavím moderní webové aplikace na míru.
+            </p>
+            <a href="#discord" class="btn-primary"><i class="fa-brands fa-discord"></i> Připoj se na Discord</a>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container about-container">
+            <div class="about-text">
+                <h2>O MNĚ A MOJÍ <span class="highlight">PRÁCI</span></h2>
+                <p>
+                    Specializuji se na kompletní správu a vývoj Minecraft serverů. Mám bohaté zkušenosti s nastavením pluginů, tvorbou vlastních nápadů a optimalizací chodu serveru.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-cube highlight"></i> <strong>Modelování:</strong> Tvorba custom 3D modelů pro Blockbench / ItemsAdder / Oraxen.</li>
+                    <li><i class="fa-solid fa-gears highlight"></i> <strong>Technik & Configy:</strong> Kompletní nastavení pluginů, rozřazení práv a ekonomiky.</li>
+                    <li><i class="fa-solid fa-code highlight"></i> <strong>Web Development:</strong> Vývoj moderních a responzivních webů pro komunity.</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="https://via.placeholder.com/450x450/1a0000/ff3333?text=Muj+Avatar+/+Model" alt="Můj Avatar">
+            </div>
+        </div>
+    </section>
+
+    <section class="slider-section">
+        <h2>UKÁZKA MOJÍ <span class="highlight">PRÁCE</span></h2>
+        <div class="slider">
+            <div class="slide-track">
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Minecraft+Model+1" alt="Ukázka 1"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/4a0000/ffffff?text=Plugin+Config+2" alt="Ukázka 2"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Web+Design+3" alt="Ukázka 3"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/4a0000/ffffff?text=Blockbench+4" alt="Ukázka 4"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Server+Setup+5" alt="Ukázka 5"></div>
+
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Minecraft+Model+1" alt="Ukázka 1"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/4a0000/ffffff?text=Plugin+Config+2" alt="Ukázka 2"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Web+Design+3" alt="Ukázka 3"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/4a0000/ffffff?text=Blockbench+4" alt="Ukázka 4"></div>
+                <div class="slide"><img src="https://via.placeholder.com/300x200/2a0000/ffffff?text=Server+Setup+5" alt="Ukázka 5"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="discord" class="discord-section">
+        <div class="discord-card">
+            <i class="fa-brands fa-discord discord-icon"></i>
+            <h2>ZAČLEŇ SE DO KOMUNITY</h2>
+            <p>Chceš domluvit zakázku, nebo se jen na něco zeptat? Připoj se na můj official Discord server!</p>
+            <a href="https://discord.gg/tvujodkaz" target="_blank" class="btn-discord">
+                <i class="fa-brands fa-discord"></i> VSTOUPIT NA DISCORD
+            </a>
+        </div>
+    </section>
+
+    <footer id="kontakt">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>KONTAKTNÍ ÚDAJE</h3>
+                <p>Máš zájem o spolupráci? Napiš mi na jedné z platforem níže.</p>
+            </div>
+            <div class="footer-contacts">
+                <div class="contact-item">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Discord: <strong>tvuj_nick#0000</strong></span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>E-mail: <strong>tvuj@email.cz</strong></span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Všechna práva vyhrazena. Vytvořeno pro Minecraft & Web Development.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
