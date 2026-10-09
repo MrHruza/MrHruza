@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MrHruza | MystiLand.eu</title>
+    <title>MrHruza | Minecraft Creator & Developer</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,11 +13,9 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fdf4f5',
-                            500: '#e11d48',
-                            600: '#be123c',
-                            700: '#9f1239',
-                            900: '#881337',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
                         }
                     }
                 }
@@ -31,46 +29,46 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #090a0f;
+            background-color: #0b0f19;
             color: #f3f4f6;
             overflow-x: hidden;
         }
         .glass {
-            background: rgba(18, 20, 32, 0.75);
+            background: rgba(17, 24, 39, 0.75);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-card {
-            background: rgba(22, 25, 41, 0.6);
+            background: rgba(17, 24, 39, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-card:hover {
-            border-color: rgba(225, 29, 72, 0.4);
+            border-color: rgba(139, 92, 246, 0.4);
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px -10px rgba(225, 29, 72, 0.2);
+            box-shadow: 0 12px 30px -10px rgba(139, 92, 246, 0.25);
         }
         .glow-bg {
             position: absolute;
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, rgba(136, 19, 55, 0) 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(109, 40, 217, 0) 70%);
             filter: blur(60px);
             z-index: -1;
             pointer-events: none;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
         .floating {
-            animation: float 5s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="min-h-screen relative selection:bg-rose-500 selection:text-white">
+<body class="min-h-screen relative selection:bg-purple-500 selection:text-white">
 
     <!-- Pozadí světla (Glow efekty) -->
     <div class="glow-bg top-0 left-1/4"></div>
@@ -78,20 +76,20 @@
 
     <!-- Horní lišta (Navbar) -->
     <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Název stránky -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-purple-600/30 group-hover:scale-105 transition-transform">
                     H
                 </div>
                 <div>
-                    <span class="font-bold text-lg tracking-tight group-hover:text-rose-500 transition-colors">MrHruza</span>
-                    <span class="block text-xs text-rose-400 font-medium">MystiLand.eu</span>
+                    <span class="font-bold text-lg tracking-tight group-hover:text-purple-400 transition-colors">MrHruza</span>
+                    <span class="block text-xs text-purple-400 font-medium">Minecraft Creator</span>
                 </div>
             </a>
 
             <!-- Tlačítko kontaktovat -->
-            <a href="#kontakt" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm shadow-lg shadow-rose-600/25 transition-all flex items-center gap-2">
+            <a href="#kontakt" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm shadow-lg shadow-purple-600/25 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-paper-plane text-xs"></i>
                 Kontaktovat
             </a>
@@ -99,136 +97,134 @@
     </header>
 
     <!-- Hlavní obsah -->
-    <main class="pt-32 pb-20 max-w-5xl mx-auto px-6">
+    <main class="pt-32 pb-20 max-w-4xl mx-auto px-6">
         
-        <!-- Úvodní sekce + Guns.lol styl profilu -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20">
+        <!-- Úvodní sekce -->
+        <section class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold tracking-wide">
+                <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+                Dostupný pro projekty & spolupráci
+            </div>
             
-            <!-- Levá část: Představení -->
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold tracking-wide">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                    MystiLand.eu • 2026
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                Ahoj, já jsem <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-500">MrHruza</span>
+            </h1>
+            
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                Jsem vášnivý Minecraft tvůrce, developer, technik a grafik. Minecraftu se věnuji už opravdu dlouhou dobu a tvořím projekty od základu.
+            </p>
+        </section>
+
+        <!-- guns.lol styl Discord profilu & Odznáčky -->
+        <section class="mb-20 flex justify-center">
+            <div class="w-full max-w-md glass-card p-6 rounded-3xl relative overflow-hidden floating">
+                <!-- Banner profilu -->
+                <div class="h-28 rounded-2xl bg-gradient-to-r from-purple-900/80 via-indigo-900/60 to-blue-900/40 relative mb-14 flex items-end justify-center">
+                    <div class="absolute -bottom-10 w-24 h-24 rounded-2xl bg-[#0b0f19] border-4 border-[#0b0f19] shadow-2xl overflow-hidden flex items-center justify-center">
+                        <!-- Avatar -->
+                        <div class="w-full h-full bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-3xl font-extrabold text-white">
+                            H
+                        </div>
+                    </div>
                 </div>
-                
-                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                    Ahoj, já jsem <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400">MrHruza</span>
-                </h1>
-                
-                <p class="text-gray-300 text-lg leading-relaxed">
-                    Stojím v čele herního serveru <strong class="text-white">MystiLand.eu</strong>. Minecraftu se věnuji už dlouhou dobu a tvořím s obrovskou vášní pro komunitu.
-                </p>
 
-                <!-- Rychlé badge -->
-                <div class="flex flex-wrap gap-3 pt-2">
-                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
-                        <i class="fa-solid fa-code text-rose-500"></i> Developer
+                <!-- Jméno a stav -->
+                <div class="text-center mb-5">
+                    <h3 class="text-xl font-bold flex items-center justify-center gap-1.5">
+                        MrHruza <i class="fa-solid fa-circle-check text-purple-400 text-sm"></i>
+                    </h3>
+                    <p class="text-xs text-purple-300 font-medium mt-0.5">@mrhruza • Developer & Designer</p>
+                </div>
+
+                <!-- Discord Odznáčky (Badges) -->
+                <div class="mb-6 bg-white/5 p-3 rounded-2xl border border-white/5 flex items-center justify-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm" title="Discord Nitro">
+                        <i class="fa-brands fa-discord"></i>
                     </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
-                        <i class="fa-solid fa-server text-rose-500"></i> Technik
+                    <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm" title="Server Booster">
+                        <i class="fa-solid fa-rocket"></i>
                     </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
-                        <i class="fa-solid fa-paintbrush text-rose-500"></i> Grafik
+                    <span class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm" title="Active Developer">
+                        <i class="fa-solid fa-code"></i>
+                    </span>
+                    <span class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-sm" title="Early Supporter">
+                        <i class="fa-solid fa-star"></i>
                     </span>
                 </div>
-            </div>
 
-            <!-- Pravá část: Guns.lol styl profilová karta -->
-            <div class="lg:col-span-5">
-                <div class="glass-card p-6 rounded-3xl relative overflow-hidden floating">
-                    <!-- Dekorativní header karty -->
-                    <div class="h-28 rounded-2xl bg-gradient-to-r from-rose-900/60 via-pink-900/40 to-purple-900/40 relative mb-14 flex items-end justify-center">
-                        <div class="absolute -bottom-10 w-24 h-24 rounded-2xl bg-[#121420] border-4 border-[#121420] shadow-xl overflow-hidden flex items-center justify-center">
-                            <!-- Zde může být tvůj obrázek/avatar -->
-                            <div class="w-full h-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-3xl font-extrabold text-white">
-                                H
+                <!-- Prolinky / Odkazy (guns.lol styl) -->
+                <div class="space-y-3">
+                    <a href="https://discord.com" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between text-sm transition-all group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#5865F2]/20 text-[#5865F2] flex items-center justify-center">
+                                <i class="fa-brands fa-discord"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="font-semibold text-xs group-hover:text-purple-300 transition-colors">Discord Profil</p>
+                                <p class="text-[10px] text-gray-400">Přidej si mě do přátel</p>
                             </div>
                         </div>
-                    </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-500 group-hover:text-white transition-colors"></i>
+                    </a>
 
-                    <!-- Jméno a status v kartě -->
-                    <div class="text-center mb-6">
-                        <h3 class="text-xl font-bold flex items-center justify-center gap-1.5">
-                            MrHruza <i class="fa-solid fa-circle-check text-rose-500 text-sm"></i>
-                        </h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Zakladatel @ MystiLand.eu</p>
-                    </div>
-
-                    <!-- Ukázka Discord profilu / Odkazů (Guns.lol styl) -->
-                    <div class="space-y-3">
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-sm">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#5865F2]/20 text-[#5865F2] flex items-center justify-center">
-                                    <i class="fa-brands fa-discord"></i>
-                                </div>
-                                <div class="text-left">
-                                    <p class="font-semibold text-xs">Discord Profil</p>
-                                    <p class="text-[10px] text-gray-400">Připoj se na náš server</p>
-                                </div>
+                    <a href="https://github.com" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between text-sm transition-all group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gray-500/20 text-gray-300 flex items-center justify-center">
+                                <i class="fa-brands fa-github"></i>
                             </div>
-                            <span class="text-xs font-bold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg">Aktivní</span>
-                        </div>
-
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-sm">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                                    <i class="fa-solid fa-server"></i>
-                                </div>
-                                <div class="text-left">
-                                    <p class="font-semibold text-xs">MystiLand.eu</p>
-                                    <p class="text-[10px] text-gray-400">Minecraft Server (2026)</p>
-                                </div>
+                            <div class="text-left">
+                                <p class="font-semibold text-xs group-hover:text-purple-300 transition-colors">GitHub</p>
+                                <p class="text-[10px] text-gray-400">Moje pluginy a kódy</p>
                             </div>
-                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">Online</span>
                         </div>
-                    </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-500 group-hover:text-white transition-colors"></i>
+                    </a>
                 </div>
             </div>
-
         </section>
 
         <!-- Sekce Dovedností -->
         <section class="mb-20">
             <div class="text-center max-w-xl mx-auto mb-12">
                 <h2 class="text-2xl sm:text-3xl font-bold mb-3">Moje Specializace & Dovednosti</h2>
-                <p class="text-gray-400 text-sm">Vše, co potřebuješ pro úspěšný Minecraft projekt pod jednou střechou.</p>
+                <p class="text-gray-400 text-sm">Vše, co potřebuješ pro dokonalý Minecraft projekt.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Karta 1 -->
                 <div class="glass-card p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-code"></i>
                     </div>
                     <h3 class="font-bold text-base mb-2">Developer</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">Tvorba vlastních pluginů, skriptů a úprava herních mechanik na míru.</p>
+                    <p class="text-xs text-gray-400 leading-relaxed">Vývoj pluginů, skriptů a pokročilá konfigurace herních systémů.</p>
                 </div>
 
                 <!-- Karta 2 -->
                 <div class="glass-card p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-server"></i>
                     </div>
                     <h3 class="font-bold text-base mb-2">Technik</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">Kompletní správa serverů, optimalizace výkonu, nastavení zabezpečení a sítí.</p>
+                    <p class="text-xs text-gray-400 leading-relaxed">Správa serverů, optimalizace výkonu, řešení lagů a nastavení sítí.</p>
                 </div>
 
                 <!-- Karta 3 -->
                 <div class="glass-card p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-paintbrush"></i>
                     </div>
                     <h3 class="font-bold text-base mb-2">Grafik</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">Návrhy bannerů, ikon, uživatelského rozhraní (UI) a vizuální styl projektu.</p>
+                    <p class="text-xs text-gray-400 leading-relaxed">Tvorba bannerů, ikon, resource packů a moderního UI pro servery.</p>
                 </div>
 
                 <!-- Karta 4 -->
                 <div class="glass-card p-6 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-crown"></i>
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-cube"></i>
                     </div>
-                    <h3 class="font-bold text-base mb-2">Vedení MystiLand</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">Zakladatel a hlavní hlava projektu MystiLand.eu (spuštěno 2026).</p>
+                    <h3 class="font-bold text-base mb-2">Minecraft Tvůrce</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Dlouholeté zkušenosti s budováním a vedením herních komunit.</p>
                 </div>
             </div>
         </section>
@@ -237,14 +233,14 @@
         <section id="kontakt" class="glass-card p-8 sm:p-12 rounded-3xl text-center relative overflow-hidden">
             <div class="max-w-xl mx-auto space-y-4">
                 <h2 class="text-2xl sm:text-3xl font-bold">Máš zájem o spolupráci?</h2>
-                <p class="text-gray-400 text-sm">Nebo se chceš podívat na server MystiLand.eu? Ozvi se mi a domluvíme se.</p>
+                <p class="text-gray-400 text-sm">Napiš mi a můžeme něco společně vytvořit nebo vyřešit.</p>
                 
                 <div class="pt-4 flex flex-wrap justify-center gap-4">
                     <a href="https://discord.com" target="_blank" class="px-6 py-3 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold text-sm transition-all flex items-center gap-2.5 shadow-lg shadow-[#5865F2]/25">
-                        <i class="fa-brands fa-discord text-lg"></i> Discord Server
+                        <i class="fa-brands fa-discord text-lg"></i> Discord
                     </a>
                     <a href="mailto:kontakt@mrhruza.cz" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-all flex items-center gap-2.5 border border-white/10">
-                        <i class="fa-solid fa-envelope text-rose-400"></i> Napsat e-mail
+                        <i class="fa-solid fa-envelope text-purple-400"></i> E-mail
                     </a>
                 </div>
             </div>
@@ -254,7 +250,7 @@
 
     <!-- Patička -->
     <footer class="border-t border-white/10 py-8 text-center text-xs text-gray-500">
-        <p>&copy; 2026 MrHruza • Zakladatel MystiLand.eu. Všechna práva vyhrazena.</p>
+        <p>&copy; 2026 MrHruza. Všechna práva vyhrazena.</p>
     </footer>
 
 </body>
