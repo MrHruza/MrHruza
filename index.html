@@ -1,335 +1,260 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MrHruza | Minecraft Developer & Tech</title>
+    <title>MrHruza | MystiLand.eu</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf4f5',
+                            500: '#e11d48',
+                            600: '#be123c',
+                            700: '#9f1239',
+                            900: '#881337',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #ff2222;
-            --primary-glow: rgba(255, 34, 34, 0.6);
-            --text-white: #ffffff;
-            --text-gray: #bbbbbb;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-
         body {
-            background: linear-gradient(180deg, rgba(15, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.95) 100%), 
-                        url('https://github.com/user-attachments/assets/b0df220c-1740-464a-ae3f-7e58278e29e3') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text-white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090a0f;
+            color: #f3f4f6;
             overflow-x: hidden;
         }
-
-        .highlight {
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary-glow);
+        .glass {
+            background: rgba(18, 20, 32, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        /* NAVBAR */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 8%;
-            background: rgba(10, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--primary);
+        .glass-card {
+            background: rgba(22, 25, 41, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; }
-
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+        .glass-card:hover {
+            border-color: rgba(225, 29, 72, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(225, 29, 72, 0.2);
         }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
+        .glow-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, rgba(136, 19, 55, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
         }
-
-        /* HERO SEKCE */
-        .hero {
-            height: 65vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-gray);
-            max-width: 700px;
-            animation: fadeInUp 1s ease;
-        }
-
-        /* SEKCE O MNĚ */
-        .about-section {
-            padding: 80px 8%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-            flex-wrap: wrap;
-            background: rgba(10, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            border-top: 1px solid rgba(255, 34, 34, 0.2);
-            border-bottom: 1px solid rgba(255, 34, 34, 0.2);
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .about-text p { color: var(--text-gray); font-size: 1.1rem; line-height: 1.7; margin-bottom: 15px; }
-
-        .about-avatar-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            min-width: 300px;
-        }
-
-        .floating-avatar {
-            width: 320px;
-            height: auto;
-            border-radius: 15px;
-            filter: drop-shadow(0 10px 20px rgba(255, 0, 0, 0.6));
-            animation: float 4s ease-in-out infinite;
-        }
-
         @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-
-        /* SLIDER S PROKLIKÁVACÍMI OBRÁZKY */
-        .slider-section {
-            padding: 60px 0;
-            text-align: center;
-            background: rgba(5, 5, 5, 0.9);
-        }
-
-        .slider {
-            overflow: hidden;
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .slide-track {
-            display: flex;
-            width: calc(300px * 10);
-            animation: scrollRight 22s linear infinite;
-        }
-
-        .slide-track:hover { animation-play-state: paused; }
-
-        .slide { width: 300px; padding: 10px; }
-        
-        .slide a {
-            display: block;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid var(--primary);
-            transition: transform 0.3s ease, filter 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-        }
-
-        .slide a:hover img {
-            transform: scale(1.08);
-            filter: brightness(1.1);
-        }
-
-        @keyframes scrollRight {
-            0% { transform: translateX(calc(-300px * 5)); }
-            100% { transform: translateX(0); }
-        }
-
-        /* DISCORD SEKCE */
-        .discord-section {
-            padding: 80px 8%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .discord-card {
-            background: linear-gradient(135deg, rgba(30, 0, 0, 0.95) 0%, rgba(5, 0, 0, 0.98) 100%);
-            border: 2px solid var(--primary);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 0 35px var(--primary-glow);
-        }
-
-        .btn-discord {
-            display: inline-block;
-            margin-top: 20px;
-            background: #5865F2;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
-        }
-
-        .btn-discord:hover {
-            transform: translateY(-3px) scale(1.05);
-            background: #4752C4;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #000000;
-            padding: 40px 8% 20px 8%;
-            border-top: 1px solid #222;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            color: #555;
-            font-size: 0.9rem;
-            border-top: 1px solid #111;
-            padding-top: 20px;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .about-section { flex-direction: column; text-align: center; }
-            .hero h1 { font-size: 2.5rem; }
+        .floating {
+            animation: float 5s ease-in-out infinite;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen relative selection:bg-rose-500 selection:text-white">
 
-    <header class="navbar">
-        <div class="logo">Mr<span class="highlight">Hruza</span></div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="historie.html"><i class="fa-solid fa-clock-rotate-left"></i> Historie</a></li>
-            </ul>
-        </nav>
+    <!-- Pozadí světla (Glow efekty) -->
+    <div class="glow-bg top-0 left-1/4"></div>
+    <div class="glow-bg bottom-1/4 right-1/4"></div>
+
+    <!-- Horní lišta (Navbar) -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Název stránky -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center font-extrabold text-white shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform">
+                    H
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight group-hover:text-rose-500 transition-colors">MrHruza</span>
+                    <span class="block text-xs text-rose-400 font-medium">MystiLand.eu</span>
+                </div>
+            </a>
+
+            <!-- Tlačítko kontaktovat -->
+            <a href="#kontakt" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm shadow-lg shadow-rose-600/25 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                Kontaktovat
+            </a>
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>Minecraft <span class="highlight">Developer</span> & Technik</h1>
-        <p>Tvorba custom 3D modelů, kompletní konfigurace pluginů a grafické práce.</p>
-    </section>
+    <!-- Hlavní obsah -->
+    <main class="pt-32 pb-20 max-w-5xl mx-auto px-6">
+        
+        <!-- Úvodní sekce + Guns.lol styl profilu -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20">
+            
+            <!-- Levá část: Představení -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    MystiLand.eu • 2026
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    Ahoj, já jsem <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400">MrHruza</span>
+                </h1>
+                
+                <p class="text-gray-300 text-lg leading-relaxed">
+                    Stojím v čele herního serveru <strong class="text-white">MystiLand.eu</strong>. Minecraftu se věnuji už dlouhou dobu a tvořím s obrovskou vášní pro komunitu.
+                </p>
 
-    <section class="about-section">
-        <div class="about-text">
-            <h2>O MNĚ & <span class="highlight">TVORBĚ</span></h2>
-            <p>Ahoj, já jsem <strong>MrHruza</strong>. Vytvářím kompletní technické a grafické zázemí pro Minecraft servery.</p>
-            <p>Mám za sebou bohatou cestu od testera přes eventera, buildera, až po technika a admina na známých i zahraničních projektech.</p>
-        </div>
-
-        <div class="about-avatar-container">
-            <img src="Snímek obrazovky 2025-10-23 171542.png" alt="MrHruza Avatar" class="floating-avatar">
-        </div>
-    </section>
-
-    <section class="slider-section">
-        <h2>UKÁZKY <span class="highlight">MOJÍ PRÁCE</span></h2>
-        <p style="color: #888; margin-top: 5px;">(Kliknutím na obrázek jej otevřeš v plné velikosti)</p>
-        <div class="slider">
-            <div class="slide-track">
-                <div class="slide"><a href="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" target="_blank"><img src="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" alt="Ukázka 1"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" target="_blank"><img src="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" alt="Ukázka 2"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" target="_blank"><img src="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" alt="Ukázka 3"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" target="_blank"><img src="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" alt="Ukázka 4"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" target="_blank"><img src="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" alt="Ukázka 5"></a></div>
-
-                <div class="slide"><a href="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" target="_blank"><img src="https://github.com/user-attachments/assets/7949236a-3391-4923-9ef9-21e0520770b9" alt="Ukázka 1"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" target="_blank"><img src="https://github.com/user-attachments/assets/66474967-b84b-4a17-800d-4a331fba48f2" alt="Ukázka 2"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" target="_blank"><img src="https://github.com/user-attachments/assets/9a46fd19-a40f-41dc-a6fa-f5f8b885fe03" alt="Ukázka 3"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" target="_blank"><img src="https://github.com/user-attachments/assets/b331e500-d6ce-4005-8d51-c853db0076e1" alt="Ukázka 4"></a></div>
-                <div class="slide"><a href="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" target="_blank"><img src="https://github.com/user-attachments/assets/053a6dea-6d7a-4c1c-b95b-a1c889d68624" alt="Ukázka 5"></a></div>
+                <!-- Rychlé badge -->
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-rose-500"></i> Developer
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-server text-rose-500"></i> Technik
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-paintbrush text-rose-500"></i> Grafik
+                    </span>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section class="discord-section">
-        <div class="discord-card">
-            <i class="fa-brands fa-discord" style="font-size: 3.5rem; color: #5865F2; margin-bottom: 15px;"></i>
-            <h2>PŘIPOJ SE NA NÁŠ DISCORD</h2>
-            <p style="color: #aaa; margin-top: 10px;">Chceš domluvit zakázku, nebo pokecat? Vstoup na můj oficiální server!</p>
-            <a href="https://discord.gg/t2h5rvAqSp" class="btn-discord" target="_blank"><i class="fa-brands fa-discord"></i> Vstoupit na Discord</a>
-        </div>
-    </section>
+            <!-- Pravá část: Guns.lol styl profilová karta -->
+            <div class="lg:col-span-5">
+                <div class="glass-card p-6 rounded-3xl relative overflow-hidden floating">
+                    <!-- Dekorativní header karty -->
+                    <div class="h-28 rounded-2xl bg-gradient-to-r from-rose-900/60 via-pink-900/40 to-purple-900/40 relative mb-14 flex items-end justify-center">
+                        <div class="absolute -bottom-10 w-24 h-24 rounded-2xl bg-[#121420] border-4 border-[#121420] shadow-xl overflow-hidden flex items-center justify-center">
+                            <!-- Zde může být tvůj obrázek/avatar -->
+                            <div class="w-full h-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-3xl font-extrabold text-white">
+                                H
+                            </div>
+                        </div>
+                    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div>
-                <h3 class="highlight">KONTAKTY</h3>
-                <p style="margin-top: 10px;"><i class="fa-brands fa-discord highlight"></i> Discord: <strong>MrHruza</strong></p>
-                <p style="margin-top: 5px;"><i class="fa-solid fa-link highlight"></i> Invite: <strong>discord.gg/t2h5rvAqSp</strong></p>
+                    <!-- Jméno a status v kartě -->
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold flex items-center justify-center gap-1.5">
+                            MrHruza <i class="fa-solid fa-circle-check text-rose-500 text-sm"></i>
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-0.5">Zakladatel @ MystiLand.eu</p>
+                    </div>
+
+                    <!-- Ukázka Discord profilu / Odkazů (Guns.lol styl) -->
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-[#5865F2]/20 text-[#5865F2] flex items-center justify-center">
+                                    <i class="fa-brands fa-discord"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-semibold text-xs">Discord Profil</p>
+                                    <p class="text-[10px] text-gray-400">Připoj se na náš server</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg">Aktivní</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-server"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="font-semibold text-xs">MystiLand.eu</p>
+                                    <p class="text-[10px] text-gray-400">Minecraft Server (2026)</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">Online</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3 class="highlight">INFO</h3>
-                <p style="margin-top: 10px; color: #aaa;">MrHruza - Modelář, Technik & Developer.</p>
+
+        </section>
+
+        <!-- Sekce Dovedností -->
+        <section class="mb-20">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-3">Moje Specializace & Dovednosti</h2>
+                <p class="text-gray-400 text-sm">Vše, co potřebuješ pro úspěšný Minecraft projekt pod jednou střechou.</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 MrHruza. Všechna práva vyhrazena.</p>
-        </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Karta 1 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Developer</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Tvorba vlastních pluginů, skriptů a úprava herních mechanik na míru.</p>
+                </div>
+
+                <!-- Karta 2 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Technik</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Kompletní správa serverů, optimalizace výkonu, nastavení zabezpečení a sítí.</p>
+                </div>
+
+                <!-- Karta 3 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-paintbrush"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Grafik</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Návrhy bannerů, ikon, uživatelského rozhraní (UI) a vizuální styl projektu.</p>
+                </div>
+
+                <!-- Karta 4 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Vedení MystiLand</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Zakladatel a hlavní hlava projektu MystiLand.eu (spuštěno 2026).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontaktní sekce -->
+        <section id="kontakt" class="glass-card p-8 sm:p-12 rounded-3xl text-center relative overflow-hidden">
+            <div class="max-w-xl mx-auto space-y-4">
+                <h2 class="text-2xl sm:text-3xl font-bold">Máš zájem o spolupráci?</h2>
+                <p class="text-gray-400 text-sm">Nebo se chceš podívat na server MystiLand.eu? Ozvi se mi a domluvíme se.</p>
+                
+                <div class="pt-4 flex flex-wrap justify-center gap-4">
+                    <a href="https://discord.com" target="_blank" class="px-6 py-3 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold text-sm transition-all flex items-center gap-2.5 shadow-lg shadow-[#5865F2]/25">
+                        <i class="fa-brands fa-discord text-lg"></i> Discord Server
+                    </a>
+                    <a href="mailto:kontakt@mrhruza.cz" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-all flex items-center gap-2.5 border border-white/10">
+                        <i class="fa-solid fa-envelope text-rose-400"></i> Napsat e-mail
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Patička -->
+    <footer class="border-t border-white/10 py-8 text-center text-xs text-gray-500">
+        <p>&copy; 2026 MrHruza • Zakladatel MystiLand.eu. Všechna práva vyhrazena.</p>
     </footer>
 
 </body>
